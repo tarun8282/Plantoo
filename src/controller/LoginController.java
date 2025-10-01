@@ -9,8 +9,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import util.AuthUtil;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginController {
 
@@ -20,17 +18,9 @@ public class LoginController {
     @FXML
     private PasswordField passwordField;
 
-    // Simple hardcoded authentication (replace with DB if needed)
-    private Map<String, String> credentials = new HashMap<>();
-
     @FXML
     public void initialize() {
         roleComboBox.getItems().addAll("Admin", "Manager", "Guest");
-
-        // Default passwords (for demonstration)
-        credentials.put("Admin", "admin123");
-        credentials.put("Manager", "manager123");
-        credentials.put("Guest", "guest123");
     }
 
     @FXML
@@ -39,7 +29,7 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (AuthUtil.authenticate(role, password)) {
-            showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + role + "!");
+            // showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + role + "!");
             openDashboard(role);
         } else {
             showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid credentials!");
