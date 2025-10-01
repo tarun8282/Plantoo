@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.LoginController"
+            style="-fx-background-color: linear-gradient(to right, #2aec78ff, #74cfedff);"
+            prefWidth="500" prefHeight="350">
+
+    <VBox alignment="CENTER" spacing="20" layoutX="50" layoutY="50" prefWidth="400">
+        
+        <!-- Card-style login box -->
+        <VBox spacing="15" alignment="CENTER" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 4);">
+
+            <Label text="Plantoo" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2575fc;"/>
+
+            <ComboBox fx:id="roleComboBox" promptText="Select Role" prefWidth="200"/>
+
+            <PasswordField fx:id="passwordField" promptText="Enter Password" prefWidth="200"/>
+
+            <Button text="Login" onAction="#handleLogin" style="-fx-background-color: #2575fc; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200;"/>
+
+        </VBox>
+    </VBox>
+
+</AnchorPane>
