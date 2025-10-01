@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.ManageHotelsController"
+      spacing="15" alignment="CENTER" style="-fx-padding: 20;">
+
+    <Label text="Hotel List" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="hotelTable" prefWidth="600">
+        <columns>
+            <TableColumn text="ID" fx:id="colId" prefWidth="50"/>
+            <TableColumn text="Hotel Name" fx:id="colName" prefWidth="200"/>
+            <TableColumn text="Total Rooms" fx:id="colRooms" prefWidth="100"/>
+            <TableColumn text="Location" fx:id="colLocation" prefWidth="200"/>
+        </columns>
+    </TableView>
+
+</VBox>

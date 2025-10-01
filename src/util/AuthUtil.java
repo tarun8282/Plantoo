@@ -8,7 +8,7 @@ public class AuthUtil {
     private static Map<String, String> credentials = new HashMap<>();
 
     static {
-        credentials.put("Admin", "admin123");
+        credentials.put("Admin", "1");
         credentials.put("Manager", "manager123");
         credentials.put("Guest", "guest123");
     }

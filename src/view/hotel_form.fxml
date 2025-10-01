@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.HotelFormController"
+      spacing="15" alignment="CENTER" style="-fx-padding: 20;">
+
+    <Label fx:id="formTitle" text="Add / Edit Hotel" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="txtHotelId" promptText="Hotel ID"/>
+    <TextField fx:id="txtHotelName" promptText="Hotel Name"/>
+    <TextField fx:id="txtTotalRooms" promptText="Total Rooms"/>
+    <TextField fx:id="txtLocation" promptText="Location"/>
+
+    <HBox spacing="15">
+        <Button text="Save" fx:id="btnSave"/>
+        <Button text="Cancel" fx:id="btnCancel"/>
+    </HBox>
+</VBox>

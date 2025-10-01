@@ -59,7 +59,7 @@
             </VBox>
 
 
-            <Button text="Login" onAction="#handleLogin"
+            <Button text="Login" defaultButton="true" onAction="#handleLogin"
                     style="-fx-background-color: #2575fc; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;"
                     prefWidth="300" prefHeight="45">
                 <font>
