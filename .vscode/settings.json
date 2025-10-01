@@ -1,0 +1,10 @@
+{
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    
+    
+    "java.autobuild.enabled": true,
+    "java.debug.settings.console": "integratedTerminal",
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
