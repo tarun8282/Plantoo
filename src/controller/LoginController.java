@@ -29,7 +29,7 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (AuthUtil.authenticate(role, password)) {
-            // showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + role + "!");
+            showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + role + "!");
             openDashboard(role);
         } else {
             showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid credentials!");

@@ -1,28 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.LoginController"
-            style="-fx-background-color: linear-gradient(to right, #2aec78ff, #74cfedff);"
-            prefWidth="500" prefHeight="350">
+<StackPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="controller.LoginController"
+           prefWidth="600" prefHeight="400"
+           style="-fx-background-color: linear-gradient(to bottom right, #6a11cb, #2575fc);">
 
-    <VBox alignment="CENTER" spacing="20" layoutX="50" layoutY="50" prefWidth="400">
-        
-        <!-- Card-style login box -->
-        <VBox spacing="15" alignment="CENTER" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 4);">
+    <VBox alignment="CENTER" spacing="20" maxWidth="380">
 
-            <Label text="Plantoo" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2575fc;"/>
+        <VBox spacing="25" alignment="CENTER"
+              style="-fx-background-color: white; -fx-background-radius: 20;  -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 20, 0, 5, 5);">
+            <padding>
+                <Insets top="40" right="40" bottom="40" left="40"/>
+            </padding>
 
-            <ComboBox fx:id="roleComboBox" promptText="Select Role" prefWidth="200"/>
+            <ImageView fitHeight="60" fitWidth="60" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../images/hotel.png"/>
+                </image>
+            </ImageView>
 
-            <PasswordField fx:id="passwordField" promptText="Enter Password" prefWidth="200"/>
+            <VBox alignment="CENTER" spacing="5">
+                <Label text="Plantoo" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #333333;">
+                    <font>
+                        <Font name="System Bold" size="36.0" />
+                    </font>
+                </Label>
+                <Label text="Welcome ! Please login to your account." style="-fx-text-fill: #888888; -fx-font-size: 14px;"/>
+            </VBox>
 
-            <Button text="Login" onAction="#handleLogin" style="-fx-background-color: #2575fc; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200;"/>
+
+            <VBox spacing="15" alignment="CENTER">
+
+                <HBox alignment="CENTER_LEFT" spacing="10"
+                      style="-fx-background-color: #f0f2f5; -fx-background-radius: 8;">
+                    <padding>
+                        <Insets left="10"/>
+                    </padding>
+                    <Label text="👤" style="-fx-font-size: 18px;"/> <ComboBox fx:id="roleComboBox" promptText="Select Role" prefWidth="250"
+                              style="-fx-background-color: transparent;"/>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="10"
+                      style="-fx-background-color: #f0f2f5; -fx-background-radius: 8;">
+                    <padding>
+                        <Insets left="10"/>
+                    </padding>
+                    <Label text="🔒" style="-fx-font-size: 18px;"/> <PasswordField fx:id="passwordField" promptText="Enter Password" prefWidth="250"
+                                   style="-fx-background-color: transparent; -fx-border-color: transparent;"/>
+                </HBox>
+
+            </VBox>
+
+
+            <Button text="Login" onAction="#handleLogin"
+                    style="-fx-background-color: #2575fc; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;"
+                    prefWidth="300" prefHeight="45">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
 
         </VBox>
     </VBox>
 
-</AnchorPane>
+</StackPane>
