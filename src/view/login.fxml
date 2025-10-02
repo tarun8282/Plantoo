@@ -10,7 +10,7 @@
 <StackPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="controller.LoginController"
            prefWidth="600" prefHeight="400"
-           style="-fx-background-color: linear-gradient(to bottom right, #6a11cb, #2575fc);">
+           style="-fx-background-color: linear-gradient(to bottom right, #1E2A38, #2594fcff);">
 
     <VBox alignment="CENTER" spacing="20" maxWidth="380">
 

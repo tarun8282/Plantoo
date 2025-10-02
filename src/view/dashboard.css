@@ -1,0 +1,48 @@
+/* 🌈 Sidebar Buttons */
+.sidebar-button {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-pref-height: 50px;
+    -fx-background-radius: 8px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 0 0 20;
+    -fx-graphic-text-gap: 10;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+    -fx-transition: 0.3s;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.sidebar-button:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ✅ Active button (when selected) */
+.sidebar-button.active {
+    -fx-background-color: white;
+    -fx-text-fill: #4e54c8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);
+}
+
+/* 🚪 Logout Button */
+.logout-button {
+    -fx-background-color: linear-gradient(to right, #ff512f, #dd2476);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-padding: 8 15 8 15;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+}
+
+.logout-button:hover {
+    -fx-background-color: linear-gradient(to right, #dd2476, #ff512f);
+}

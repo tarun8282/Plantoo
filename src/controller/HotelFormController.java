@@ -24,10 +24,13 @@ public class HotelFormController {
         this.mode = mode;
         if ("edit".equals(mode)) {
             formTitle.setText("Edit Hotel");
+            txtHotelId.setVisible(true);
+            txtHotelId.setManaged(true);
             txtHotelId.setDisable(true); // ID cannot be changed
         } else {
             formTitle.setText("Add Hotel");
-            txtHotelId.setDisable(false);
+            txtHotelId.setVisible(false);
+            txtHotelId.setManaged(false);
         }
     }
 
@@ -54,14 +57,20 @@ public class HotelFormController {
 
     private void saveHotel() {
         try {
-            int id = Integer.parseInt(txtHotelId.getText());
             String name = txtHotelName.getText();
             int totalRooms = Integer.parseInt(txtTotalRooms.getText());
             String location = txtLocation.getText();
 
             if ("add".equals(mode)) {
-                Hotel newHotel = new Hotel(id, name, totalRooms, location);
-                HotelDAO.addHotel(newHotel);
+                Hotel newHotel = new Hotel();
+                newHotel.setHotelName(name);
+                newHotel.setTotalRooms(totalRooms);
+                newHotel.setLocation(location);
+
+                int generatedId = HotelDAO.addHotel(newHotel); // DAO returns auto-generated ID
+                if (generatedId != -1) {
+                    System.out.println("Hotel added with ID: " + generatedId);
+                }
             } else if ("edit".equals(mode)) {
                 hotel.setHotelName(name);
                 hotel.setTotalRooms(totalRooms);
@@ -72,7 +81,7 @@ public class HotelFormController {
             closeWindow();
 
         } catch (NumberFormatException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Enter valid numbers for ID and Total Rooms.");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Enter a valid number for Total Rooms.");
             alert.showAndWait();
         } catch (Exception ex) {
             ex.printStackTrace();
