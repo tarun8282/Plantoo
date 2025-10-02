@@ -6,7 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Hotel;
 import dao.HotelDAO;
-
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -14,7 +14,8 @@ public class ManageHotelsController {
 
     @FXML
     private TableView<Hotel> hotelTable;
-
+    @FXML
+    private TableColumn<Hotel, Number> SerialNO; // Use Number instead of Integer
     @FXML
     private TableColumn<Hotel, Integer> colId;
     @FXML
@@ -28,6 +29,11 @@ public class ManageHotelsController {
 
     @FXML
     public void initialize() {
+        // Serial No column (always starts from 1, increments row by row)
+        SerialNO.setCellValueFactory(cellData ->
+            new ReadOnlyObjectWrapper<>(hotelTable.getItems().indexOf(cellData.getValue()) + 1)
+        );
+
         colId.setCellValueFactory(new PropertyValueFactory<>("hotelId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
         colRooms.setCellValueFactory(new PropertyValueFactory<>("totalRooms"));

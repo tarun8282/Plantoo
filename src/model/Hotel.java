@@ -5,6 +5,10 @@ public class Hotel {
     private String hotelName;
     private int totalRooms;
     private String location;
+    @Override
+    public String toString() {
+    return this.getHotelName(); // display hotel name in ComboBox
+    }
 
     // Default constructor
     public Hotel() {
