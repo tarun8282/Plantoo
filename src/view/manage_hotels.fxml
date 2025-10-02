@@ -6,14 +6,21 @@
 <VBox xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controller.ManageHotelsController"
       spacing="15" alignment="CENTER" style="-fx-padding: 20;"
-      stylesheets="@managehotels.css">
+      stylesheets="@cSS/managehotels.css">
 
     <Label text="Hotel List" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
-    <TableView fx:id="hotelTable" prefWidth="600">
+    <!-- Buttons row -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Add Hotel" fx:id="btnAdd" styleClass="primary-button"/>
+        <Button text="Edit Hotel" fx:id="btnEdit" styleClass="primary-button"/>
+        <Button text="Delete Hotel" fx:id="btnDelete" styleClass="primary-button"/>
+    </HBox>
+
+    <!-- TableView -->
+    <TableView fx:id="hotelTable" prefWidth="650">
         <columns>
             <TableColumn text="S.No" fx:id="SerialNO" prefWidth="50"/>
-            
             <TableColumn text="ID" fx:id="colId" prefWidth="50"/>
             <TableColumn text="Hotel Name" fx:id="colName" prefWidth="200"/>
             <TableColumn text="Total Rooms" fx:id="colRooms" prefWidth="100"/>

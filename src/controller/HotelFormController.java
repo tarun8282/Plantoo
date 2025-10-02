@@ -8,6 +8,8 @@ import dao.HotelDAO;
 
 public class HotelFormController {
 
+    
+
     @FXML
     private Label formTitle;
 

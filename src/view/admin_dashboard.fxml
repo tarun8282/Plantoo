@@ -8,7 +8,7 @@
 <BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controller.AdminDashboardController"
             prefWidth="900" prefHeight="600"
-            stylesheets="@dashboard.css"
+            stylesheets="@cSS/dashboard.css"
             style="-fx-font-family: 'Segoe UI', Arial, sans-serif; -fx-background-color: #F9FAFB;">
 
     <!-- LEFT SIDEBAR -->

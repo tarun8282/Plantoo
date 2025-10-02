@@ -1,0 +1,85 @@
+/* Root VBox styling */
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #f4f6f8;
+}
+
+/* Labels */
+.label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+/* HBox for buttons */
+.hbox {
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+
+/* Buttons styling */
+.button, .primary-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-padding: 6 12 6 12;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 2, 0, 0, 1);
+}
+
+.button:hover, .primary-button:hover {
+    -fx-background-color: #45a049;
+}
+
+/* TableView styling */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 1);
+}
+
+/* Table header */
+.table-view .column-header-background {
+    -fx-background-color: #e0e0e0;
+}
+
+.table-view .column-header, 
+.table-view .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-font-size: 13px;
+}
+
+/* Table rows */
+.table-row-cell {
+    -fx-background-color: white;
+}
+
+.table-row-cell:filled:selected, 
+.table-row-cell:focused:selected {
+    -fx-background-color: #c8e6c9; /* light green highlight */
+}
+
+/* Table cells padding */
+.table-cell {
+    -fx-padding: 4 8 4 8;
+    -fx-font-size: 13px;
+}
+
+/* Optional: Different colors for status (if you add Status column later) */
+.table-cell:filled:selected .status-available {
+    -fx-text-fill: green;
+}
+
+.table-cell:filled:selected .status-occupied {
+    -fx-text-fill: red;
+}
+
+.table-cell:filled:selected .status-maintenance {
+    -fx-text-fill: orange;
+}

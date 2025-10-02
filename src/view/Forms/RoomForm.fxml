@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:controller="controller.RoomFormController"
+           prefWidth="600" prefHeight="400"
+           stylesheets="../cSS/form.css">
+    <VBox spacing="15" alignment="CENTER" style="-fx-padding: 20;">
+        <Label fx:id="formTitle" text="Add / Edit Room" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+        <!-- Hidden fields for hotel id and room number (if needed for edit) -->
+        <TextField fx:id="txtHotelId" promptText="Hotel ID" visible="false" managed="false"/>
+        <TextField fx:id="txtRoomNum" promptText="Room Number"/>
+
+        <ComboBox fx:id="comboRoomType" promptText="Select Room Type"/>
+        <ComboBox fx:id="comboStatus" promptText="Status">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Available"/>
+                    <String fx:value="Booked"/>
+                    <String fx:value="Maintenance"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <HBox spacing="15">
+            <Button text="Save" fx:id="btnSave"/>
+            <Button text="Cancel" fx:id="btnCancel"/>
+        </HBox>
+    </VBox>
+</StackPane>
