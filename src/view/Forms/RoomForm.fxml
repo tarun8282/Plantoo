@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
 
-<StackPane fx:controller="controller.RoomFormController"
-           prefWidth="600" prefHeight="400"
-           stylesheets="../cSS/form.css">
-    <VBox spacing="15" alignment="CENTER" style="-fx-padding: 20;">
-        <Label fx:id="formTitle" text="Add / Edit Room" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+<StackPane xmlns="http://javafx.com/javafx/25"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="controller.RoomFormController"
+           stylesheets="@/view/cSS/form.css">
 
-        <!-- Hidden fields for hotel id and room number (if needed for edit) -->
-        <TextField fx:id="txtHotelId" promptText="Hotel ID" visible="false" managed="false"/>
-        <TextField fx:id="txtRoomNum" promptText="Room Number"/>
+    <!-- Card Container -->
+    <VBox spacing="20" alignment="TOP_CENTER" styleClass="card" prefWidth="400" prefHeight="350">
+        <Label fx:id="formTitle" text="Add Room" styleClass="form-title" />
 
-        <ComboBox fx:id="comboRoomType" promptText="Select Room Type"/>
-        <ComboBox fx:id="comboStatus" promptText="Status">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Available"/>
-                    <String fx:value="Booked"/>
-                    <String fx:value="Maintenance"/>
-                </FXCollections>
-            </items>
-        </ComboBox>
+        <GridPane hgap="15" vgap="15" alignment="CENTER">
+            <Label text="Hotel:" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="form-label"/>
+            <ComboBox fx:id="comboHotel" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="200"/>
 
-        <HBox spacing="15">
-            <Button text="Save" fx:id="btnSave"/>
-            <Button text="Cancel" fx:id="btnCancel"/>
+            <Label text="Room No:" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="form-label"/>
+            <TextField fx:id="txtRoomNum" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="200"/>
+
+            <Label text="Room Type:" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="form-label"/>
+            <ComboBox fx:id="comboRoomType" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="200"/>
+
+            <Label text="Rent:" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="form-label"/>
+            <TextField fx:id="txtRent" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="200" editable="false"/>
+
+            <Label text="Status:" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="form-label"/>
+            <ComboBox fx:id="comboStatus" GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="200"/>
+        </GridPane>
+
+        <HBox spacing="25" alignment="CENTER">
+            <Button fx:id="btnSave" text="Save" />
+            <Button fx:id="btnCancel" text="Cancel" />
+
+
         </HBox>
     </VBox>
 </StackPane>

@@ -1,104 +1,149 @@
 package controller;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.collections.FXCollections;
 import javafx.stage.Stage;
 import model.Room;
 import model.RoomType;
+import model.Hotel;
 import dao.RoomDAO;
 import dao.RoomTypeDAO;
+import dao.HotelDAO;
 
 import java.util.List;
 
 public class RoomFormController {
 
-    @FXML
-    private Label formTitle;
-
-    @FXML
-    private TextField txtHotelId, txtRoomNum;
-
-    @FXML
-    private ComboBox<RoomType> comboRoomType;
-
-    @FXML
-    private ComboBox<String> comboStatus;
-
-    @FXML
-    private Button btnSave, btnCancel;
+    @FXML private Label formTitle;
+    @FXML private ComboBox<Hotel> comboHotel;
+    @FXML private TextField txtRoomNum;
+    @FXML private ComboBox<RoomType> comboRoomType;
+    @FXML private TextField txtRent;
+    @FXML private ComboBox<String> comboStatus;
+    @FXML private Button btnSave, btnCancel;
 
     private String mode; // "add" or "edit"
-    private Room room;
-
-    public void setMode(String mode) {
-        this.mode = mode;
-        if ("edit".equals(mode)) {
-            formTitle.setText("Edit Room");
-            txtHotelId.setDisable(true); // Hotel ID cannot be changed
-            txtRoomNum.setDisable(true); // Room number cannot be changed
-        } else {
-            formTitle.setText("Add Room");
-        }
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-        if (room != null) {
-            txtHotelId.setText(String.valueOf(room.getHotelId()));
-            txtRoomNum.setText(String.valueOf(room.getRoomNum()));
-            comboRoomType.setValue(room.getRoomType());
-            comboStatus.setValue(room.getStatus());
-        }
-    }
+    private Room editingRoom;
+    
 
     @FXML
     public void initialize() {
-        // Load Room Types
-        List<RoomType> types = RoomTypeDAO.getAllRoomTypes();
-        comboRoomType.setItems(FXCollections.observableArrayList(types));
+        // Load hotels
+        List<Hotel> hotels = HotelDAO.getAllHotels();
+        comboHotel.setItems(FXCollections.observableArrayList(hotels));
 
-        btnCancel.setOnAction(e -> closeWindow());
-        btnSave.setOnAction(e -> saveRoom());
+        // Load room types
+        List<RoomType> roomTypes = RoomTypeDAO.getAllRoomTypes();
+        comboRoomType.setItems(FXCollections.observableArrayList(roomTypes));
+
+        // Load status options
+        comboStatus.setItems(FXCollections.observableArrayList("Available", "Occupied", "Maintenance"));
+
+        // Auto-fill rent when RoomType is selected
+        comboRoomType.setOnAction(e -> {
+            RoomType selected = comboRoomType.getValue();
+            if (selected != null) {
+                txtRent.setText(String.valueOf(selected.getRent()));
+            }
+        });
+
+        // Cancel button closes form
+        btnCancel.setOnAction(e -> ((Stage) btnCancel.getScene().getWindow()).close());
+        btnSave.setOnAction(e -> handleSave());
+
+    }
+    
+
+    // Called by ManageRoomsController
+    public void setMode(String mode) {
+        this.mode = mode;
+        formTitle.setText(mode.equals("add") ? "Add Room" : "Edit Room");
+
+        if (mode.equals("add")) {
+            txtRoomNum.setEditable(true);
+            comboHotel.setDisable(false);
+        } else {
+            txtRoomNum.setEditable(false);
+            comboHotel.setDisable(true);
+        }
     }
 
-    private void closeWindow() {
-        Stage stage = (Stage) btnCancel.getScene().getWindow();
-        stage.close();
-    }
+    // Called for editing an existing room
+    public void setRoom(Room room) {
+        this.editingRoom = room;
 
-    private void saveRoom() {
+        comboHotel.setValue(new Hotel(room.getHotelId(), room.getHotelName())); // minimal constructor
+        txtRoomNum.setText(String.valueOf(room.getRoomNum()));
+
+        // Select RoomType
+        for (RoomType rt : comboRoomType.getItems()) {
+            if (rt.getRoomTypeId() == room.getRoomTypeId()) {
+                comboRoomType.setValue(rt);
+                break;
+            }
+        }
+
+        txtRent.setText(String.valueOf(room.getRent()));
+        comboStatus.setValue(room.getStatus());
+    }
+    
+    @FXML
+    private void handleSave() {
         try {
-            int hotelId = Integer.parseInt(txtHotelId.getText());
-            int roomNum = Integer.parseInt(txtRoomNum.getText());
-            RoomType selectedType = comboRoomType.getSelectionModel().getSelectedItem();
+            Hotel selectedHotel = comboHotel.getValue();
+            RoomType selectedType = comboRoomType.getValue();
             String status = comboStatus.getValue();
+            int roomNum = Integer.parseInt(txtRoomNum.getText());
 
-            if (selectedType == null || status == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Select Room Type and Status.");
-                alert.showAndWait();
+            if (selectedHotel == null || selectedType == null || status == null) {
+                showAlert("Please fill all fields.");
                 return;
             }
 
-            if ("add".equals(mode)) {
-                Room newRoom = new Room(hotelId, roomNum, selectedType.getRoomTypeId(), selectedType, status, null);
-                RoomDAO.addRoom(newRoom);
-            } else if ("edit".equals(mode)) {
-                room.setRoomTypeId(selectedType.getRoomTypeId());
-                room.setRoomType(selectedType);
-                room.setStatus(status);
-                RoomDAO.updateRoom(room);
+            if (mode.equals("add")) {
+                Room newRoom = new Room(
+                        selectedHotel.getHotelId(),
+                        roomNum,
+                        selectedType.getRoomTypeId(),
+                        selectedType.getTypeName(),
+                        selectedType.getRent(),
+                        status,
+                        selectedHotel.getHotelName()
+                );
+
+                boolean success = RoomDAO.addRoom(newRoom);
+                if (!success) {
+                    showAlert("Failed to add room. It may already exist.");
+                    return;
+                }
+
+            } else if (mode.equals("edit") && editingRoom != null) {
+                editingRoom.setRoomTypeId(selectedType.getRoomTypeId());
+                editingRoom.setRent(selectedType.getRent());
+                editingRoom.setStatus(status);
+
+                boolean success = RoomDAO.updateRoom(editingRoom);
+                if (!success) {
+                    showAlert("Failed to update room.");
+                    return;
+                }
             }
 
-            closeWindow();
+            // Close the form
+            Stage stage = (Stage) btnSave.getScene().getWindow();
+            stage.close();
 
-        } catch (NumberFormatException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Enter valid numbers for Hotel ID and Room Number.");
-            alert.showAndWait();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error saving room: " + ex.getMessage());
-            alert.showAndWait();
+        } catch (NumberFormatException e) {
+            showAlert("Room number must be a valid integer.");
         }
+    }
+    
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

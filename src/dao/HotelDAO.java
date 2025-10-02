@@ -33,6 +33,9 @@ public class HotelDAO {
 
         return hotels;
     }
+    
+    
+
 
     // Add new hotel and return generated Hotel_id
     public static int addHotel(Hotel hotel) {

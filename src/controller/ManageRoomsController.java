@@ -1,7 +1,12 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,7 +37,7 @@ public class ManageRoomsController {
             new ReadOnlyObjectWrapper<>(roomTable.getItems().indexOf(cellData.getValue()) + 1)
         );
         
-        colHotelId.setCellValueFactory(cellData ->new ReadOnlyObjectWrapper<>(cellData.getValue().getHotelId()));
+        colHotelId.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getHotelId()));
         colHotel.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getHotelName()));
         colRoomNum.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getRoomNum()));
         colRoomType.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getRoomTypeName()));
@@ -53,14 +58,28 @@ public class ManageRoomsController {
             loadRooms(selected.getHotelId());
         });
 
-        // Button actions (can link to popups/forms later)
+        // Button actions
         btnRefresh.setOnAction(e -> loadRooms(hotelCombo.getSelectionModel().getSelectedItem().getHotelId()));
-        btnAddRoom.setOnAction(e -> {/* open add room form */});
-        btnEditRoom.setOnAction(e -> {/* open edit form for selected room */});
+
+        btnAddRoom.setOnAction(e -> openRoomForm("add", null));
+
+        btnEditRoom.setOnAction(e -> {
+            Room selected = getSelectedRoom();
+            if (selected != null) {
+                openRoomForm("edit", selected);
+            } else {
+                showAlert("Please select a room to edit.");
+            }
+        });
+
         btnDeleteRoom.setOnAction(e -> {
             Room selected = getSelectedRoom();
-            if(selected != null) RoomDAO.deleteRoom(selected.getHotelId(), selected.getRoomNum());
-            loadRooms(hotelCombo.getSelectionModel().getSelectedItem().getHotelId());
+            if (selected != null) {
+                boolean deleted = RoomDAO.deleteRoom(selected.getHotelId(), selected.getRoomNum());
+                if (deleted) loadRooms(hotelCombo.getSelectionModel().getSelectedItem().getHotelId());
+            } else {
+                showAlert("Please select a room to delete.");
+            }
         });
     }
 
@@ -71,5 +90,35 @@ public class ManageRoomsController {
 
     public Room getSelectedRoom() {
         return roomTable.getSelectionModel().getSelectedItem();
+    }
+
+    private void openRoomForm(String mode, Room room) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Forms/RoomForm.fxml"));
+            Parent root = loader.load();
+
+            RoomFormController controller = loader.getController();
+            controller.setMode(mode); // "add" or "edit"
+            if (room != null) controller.setRoom(room); // prefill fields for edit
+
+            Stage stage = new Stage();
+            stage.setTitle(mode.equals("add") ? "Add Room" : "Edit Room");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+            // Refresh table after closing form
+            loadRooms(hotelCombo.getSelectionModel().getSelectedItem().getHotelId());
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

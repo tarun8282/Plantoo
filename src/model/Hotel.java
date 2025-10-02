@@ -13,6 +13,11 @@ public class Hotel {
     // Default constructor
     public Hotel() {
     }
+    // Constructor for ComboBox / minimal data
+    public Hotel(int hotelId, String hotelName) {
+        this.hotelId = hotelId;
+        this.hotelName = hotelName;
+    }
 
     // Constructor for adding new hotel (without ID)
     public Hotel(String hotelName, int totalRooms, String location) {

@@ -1,0 +1,56 @@
+/* Card styling */
+.card {
+    -fx-background-color: #ffffff;
+    -fx-padding: 30px;
+    -fx-spacing: 20px;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10,0,0,4);
+}
+
+/* Form title */
+.form-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+/* Labels */
+.form-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555555;
+}
+
+/* Primary button */
+.btn-primary {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 20px;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #45a049;
+}
+
+/* Secondary button */
+.btn-secondary {
+    -fx-background-color: #f44336;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 20px;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #da190b;
+}
+
+/* ComboBox and TextField styling */
+.text-field, .combo-box {
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
