@@ -68,16 +68,27 @@ private void openManageHotels() {
     private void openManageRooms() {
         loadContent("/view/manage_rooms.fxml");
     }
-
+    @FXML
+    private void openManageGuests() {
+        loadContent("/view/manage_guests.fxml");
+    }
+    @FXML
+    private void openManageDepartments() {
+        System.out.println("Opening manage_departments View.....");
+        loadContent("/view/manage_departments.fxml");
+    }
+    @FXML
+    private void openManageReservation() {
+        System.out.println("Opening manage_Reservation View.....");
+        loadContent("/view/manage_reservation.fxml");
+    }
     @FXML
     private void openManageStaff() {
+        System.out.println("Opening manage_departments View.....");
         loadContent("/view/manage_staff.fxml");
     }
 
-    @FXML
-    private void openReports() {
-        loadContent("/view/reports.fxml");
-    }
+    
 
     // -----------------------------------
     // Logout

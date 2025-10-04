@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ManageGuestController"
+            stylesheets="@/view/cSS/form.css"
+            prefWidth="800" prefHeight="500">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox spacing="15" alignment="CENTER_LEFT"
+              style="-fx-background-color: #4e54c8; -fx-padding: 15;">
+            <Label text="👥 Manage Guests" 
+                   style="-fx-font-size: 20px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <!-- CENTER CONTENT -->
+    <center>
+        <VBox spacing="15" alignment="TOP_CENTER" style="-fx-padding: 20;">
+            
+            <!-- Search Bar -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="txtSearchGuest" promptText="🔍 Search guest by name or ID"
+                           prefWidth="250"/>
+                <Button text="Search" onAction="#handleSearchGuest"/>
+            </HBox>
+
+            <!-- Table of Guests -->
+            <TableView fx:id="tblGuests" prefHeight="350" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colGuestId" text="Guest ID" prefWidth="120"/>
+                    <TableColumn fx:id="colGuestName" text="Name" prefWidth="180"/>
+                    <TableColumn fx:id="colGuestAge" text="Age" prefWidth="150"/>
+                    <TableColumn fx:id="colGuestGender" text="Gender" prefWidth="200"/>
+                    <TableColumn fx:id="colGuestPhone" text="Phone" prefWidth="200"/>
+                </columns>
+            </TableView>
+
+            <!-- Action Buttons -->
+            <HBox spacing="15" alignment="CENTER" style="-fx-padding: 10;">
+                <Button text="➕ Add Guest" onAction="#handleAddGuest" styleClass="primary-button"/>
+                <Button text="✏ Edit Guest" onAction="#handleEditGuest" styleClass="warning-button"/>
+                <Button text="❌ Delete Guest" onAction="#handleDeleteGuest" styleClass="danger-button"/>
+            </HBox>
+
+        </VBox>
+    </center>
+</BorderPane>

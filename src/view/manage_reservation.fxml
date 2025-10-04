@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ManageReservationController"
+            stylesheets="@/view/cSS/form.css"
+            prefWidth="800" prefHeight="500">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox spacing="15" alignment="CENTER_LEFT"
+              style="-fx-background-color: #4e54c8; -fx-padding: 15;">
+            <Label text="👥 Manage Reservation" 
+                   style="-fx-font-size: 20px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <!-- CENTER CONTENT -->
+    <center>
+        <VBox spacing="15" alignment="TOP_CENTER" style="-fx-padding: 20;">
+            
+            <!-- Search Bar -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="txtSearchReservation" promptText="🔍 Search Reservation by name or ID"
+                           prefWidth="280"/>
+                <Button text="Search" onAction="#handleSearchReservation"/>
+            </HBox>
+
+            <!-- Table of Reservation -->
+            <TableView fx:id="reservationTable">
+    <columns>
+        <TableColumn fx:id="colId" text="Reservation ID"/>
+        <TableColumn fx:id="colGuestId" text="Guest ID"/>
+        <TableColumn fx:id="colGuestName" text="Guest Name"/>
+        <TableColumn fx:id="colHotelId" text="Hotel ID"/>
+        <TableColumn fx:id="colRoomNum" text="Room No"/>
+        <TableColumn fx:id="colCheckIn" text="Check In"/>
+        <TableColumn fx:id="colCheckOut" text="Check Out"/>
+    </columns>
+</TableView>
+
+
+            <!-- Action Buttons -->
+            <HBox spacing="15" alignment="CENTER" style="-fx-padding: 10;">
+                <Button text="➕ Add Reservation" onAction="#handleAddReservation" styleClass="primary-button"/>
+                <Button text="✏ Edit Reservation" onAction="#handleEditReservation" styleClass="warning-button"/>
+                <Button text="❌ Delete Reservation" onAction="#handleDeleteReservation" styleClass="danger-button"/>
+            </HBox>
+
+        </VBox>
+    </center>
+</BorderPane>

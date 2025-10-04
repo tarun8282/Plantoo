@@ -19,7 +19,7 @@
               alignment="TOP_CENTER">
 
             <!-- Logo / Title -->
-            <Label text="🌿 Plantoo"
+            <Label text="🍂 Plantoo"
                    style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;"/>
 
             <!-- Sidebar Menu Buttons -->
@@ -31,8 +31,20 @@
                 <Button text="🛏  Manage Rooms" onAction="#openManageRooms" 
                         styleClass="sidebar-button" prefWidth="260"/>
 
+                <!-- NEW Manage Guest Button -->
+                <Button text="👥  Manage Guests" onAction="#openManageGuests"
+                        styleClass="sidebar-button" prefWidth="260"/>
+                <Button text="📅  Manage Reservation" onAction="#openManageReservation"
+                styleClass="sidebar-button" prefWidth="260"/>
+
+                 <!-- NEW Manage Departments Button -->
+                <Button text="🏢  Manage Departments" onAction="#openManageDepartments"
+                        styleClass="sidebar-button" prefWidth="260"/>
+
                 <Button text="👤  Manage Staff" onAction="#openManageStaff" 
                         styleClass="sidebar-button" prefWidth="260"/>
+
+               
 
             </VBox>
         </VBox>
