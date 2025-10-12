@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ManagerDashboardController"
+            prefWidth="900" prefHeight="600"
+            stylesheets="@cSS/dashboard.css"
+            style="-fx-font-family: 'Segoe UI', Arial, sans-serif; -fx-background-color: #F9FAFB;">
+
+    <!-- LEFT SIDEBAR -->
+    <left>
+        <VBox fx:id="leftMenuContainer" spacing="20"
+              style="-fx-background-color: linear-gradient(to bottom, #4e54c8, #8f94fb); 
+                     -fx-pref-width: 270; -fx-padding: 40 0 20 0;"
+              alignment="TOP_CENTER">
+
+            <!-- Logo / Title -->
+            <Label text="📊 Manager"
+                   style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+
+            <!-- Sidebar Menu Buttons -->
+            <VBox spacing="15" style="-fx-padding: 50 0 0 0;" alignment="TOP_LEFT">
+
+                <Button text="🏨  View Hotels" onAction="#openViewHotels" 
+                        styleClass="sidebar-button" prefWidth="260"/>
+
+                <Button text="🛏  Manage Rooms" onAction="#openManageRooms" 
+                        styleClass="sidebar-button" prefWidth="260"/>
+
+                <Button text="👥  Manage Guests" onAction="#openManageGuests"
+                        styleClass="sidebar-button" prefWidth="260"/>
+
+                <Button text="📅  Manage Reservations" onAction="#openManageReservations"
+                        styleClass="sidebar-button" prefWidth="260"/>
+
+                <Button text="🏢  Manage Departments" onAction="#openManageDepartments"
+                        styleClass="sidebar-button" prefWidth="260"/>
+
+                <Button text="👤  Manage Staff" onAction="#openManageStaff" 
+                        styleClass="sidebar-button" prefWidth="260"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- CENTER CONTENT -->
+    <center>
+        <VBox style="-fx-background-color: #F9FAFB;">
+
+            <!-- TOP BAR -->
+            <HBox alignment="CENTER_LEFT" spacing="20"
+                  style="-fx-background-color: white; -fx-pref-height: 70px; 
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 5);">
+                <padding>
+                    <Insets left="20.0" right="20.0"/>
+                </padding>
+
+                <Label text="📊 Dashboard Overview" 
+                       style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Label text="👋 Welcome, Manager!" 
+                       style="-fx-font-size: 14px; -fx-text-fill: #555;"/>
+
+                <Button text="Logout" onAction="#handleLogout"
+                        styleClass="logout-button"/>
+            </HBox>
+
+            <!-- Main Content Area -->
+            <AnchorPane VBox.vgrow="ALWAYS">
+                <StackPane fx:id="contentArea" AnchorPane.topAnchor="20.0" 
+                           AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0" 
+                           AnchorPane.leftAnchor="20.0"
+                           style="-fx-background-color: white; -fx-background-radius: 15px; 
+                                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 20, 0, 0, 0);">
+                    <children>
+                        <Label text="✨ Select an option from the menu to begin."
+                               style="-fx-font-size: 20px; -fx-text-fill: #4e54c8; -fx-font-weight: bold;"/>
+                    </children>
+                </StackPane>
+            </AnchorPane>
+        </VBox>
+    </center>
+</BorderPane>
