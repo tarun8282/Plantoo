@@ -1,6 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-        "A:/openjfx-25_windows-x64_bin-sdk/javafx-sdk-25/lib/**/*.jar",
-        "A:/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar"
-    ]
-}
