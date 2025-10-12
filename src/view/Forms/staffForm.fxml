@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="controller.StaffFormController"
+      spacing="10" style="-fx-background-color: #f0f2f5;"
+      stylesheets="@/view/cSS/form.css">
+      <padding>
+    <Insets top="20" right="20" bottom="20" left="20"/>
+</padding>
+
+
+    <Label text="Add / Edit Staff" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="10" vgap="10">
+        <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Gender:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="cmbGender" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Salary:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtSalary" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Hotel:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="cmbHotel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <Label text="Department:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="cmbDept" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+        <Label text="Phone:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtPhone" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Save" fx:id="btnSave" style="-fx-background-color:#4CAF50; -fx-text-fill:white;"/>
+        <Button text="Cancel" fx:id="btnCancel" style="-fx-background-color:#f44336; -fx-text-fill:white;"/>
+    </HBox>
+</VBox>

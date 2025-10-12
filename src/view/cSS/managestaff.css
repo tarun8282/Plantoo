@@ -1,0 +1,61 @@
+/* Background */
+.root {
+    -fx-background-color: #f0f2f5;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+/* Top container */
+.top-container {
+    -fx-padding: 20;
+}
+
+/* Dashboard title */
+.dashboard-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* Button bar */
+.button-bar {
+    -fx-padding: 5 0 10 0;
+}
+
+/* Buttons */
+.button-bar .button {
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-padding: 8 20 8 20;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.1) , 2,0,0,1 );
+    -fx-background-insets: 0;
+}
+
+/* Specific button colors */
+.btn-add { -fx-background-color: #4CAF50; }
+.btn-edit { -fx-background-color: #2196F3; }
+.btn-delete { -fx-background-color: #f44336; }
+.btn-refresh { -fx-background-color: #9E9E9E; }
+
+/* Button hover effect */
+.button-bar .button:hover {
+    -fx-opacity: 0.85;
+}
+
+/* Table styling */
+.staff-table {
+    -fx-background-color: white;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+}
+
+/* Table headers */
+.staff-table .column-header-background {
+    -fx-background-color: #eceff1;
+}
+.staff-table .column-header, .staff-table .filler {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}

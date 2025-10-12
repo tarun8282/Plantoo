@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.ManageStaffController" stylesheets="@cSS/managestaff.css">
+    
+    <!-- Top Section: Title + Buttons -->
+    <top>
+        <VBox spacing="15" styleClass="top-container">
+            <Label text="Manage Staff Dashboard" styleClass="dashboard-title" />
+            
+            <HBox spacing="10" styleClass="button-bar">
+                <Button text="Add Staff" fx:id="btnAdd" styleClass="btn-add" />
+                <Button text="Edit Staff" fx:id="btnEdit" styleClass="btn-edit" />
+                <Button text="Delete Staff" fx:id="btnDelete" styleClass="btn-delete" />
+                <Button text="Refresh" fx:id="btnRefresh" styleClass="btn-refresh" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- Center Section: Table -->
+    <center>
+        <TableView fx:id="staffTable" prefHeight="400" prefWidth="800" styleClass="staff-table">
+            <columns>
+                <TableColumn fx:id="colStaffId" text="Staff ID" />
+                <TableColumn fx:id="colName" text="Name" />
+                <TableColumn fx:id="colGender" text="Gender" />
+                <TableColumn fx:id="colSalary" text="Salary" />
+                <TableColumn fx:id="colDept" text="Department" />
+                <TableColumn fx:id="colHotel" text="Hotel" />
+                <TableColumn fx:id="colPhone" text="Phone" />
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

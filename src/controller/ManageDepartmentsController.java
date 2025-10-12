@@ -11,6 +11,9 @@ import model.Department;
 public class ManageDepartmentsController {
 
     @FXML
+    private ComboBox<String> cmbHotel; // Hotel selector
+
+    @FXML
     private TableView<Department> departmentTable;
     @FXML
     private TableColumn<Department, Integer> colDeptId;
@@ -31,25 +34,54 @@ public class ManageDepartmentsController {
         colDeptName.setCellValueFactory(new PropertyValueFactory<>("deptName"));
         colHotel.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
 
-        loadDepartments();
+        // Load hotels into ComboBox
+        loadHotels();
+
+        // When hotel changes, reload departments
+        cmbHotel.setOnAction(e -> loadDepartments());
+    }
+
+    private void loadHotels() {
+        ObservableList<String> hotels = FXCollections.observableArrayList(departmentDAO.getAllHotelNames());
+        cmbHotel.setItems(hotels);
     }
 
     private void loadDepartments() {
         departmentList.clear();
-        departmentList.addAll(departmentDAO.getAllDepartments());
+        String selectedHotel = cmbHotel.getSelectionModel().getSelectedItem();
+        if (selectedHotel != null) {
+            departmentList.addAll(departmentDAO.getDepartmentsByHotel(selectedHotel));
+        }
         departmentTable.setItems(departmentList);
     }
 
     @FXML
     private void handleAddDepartment() {
-        // TODO: Open a dialog to add department
-        System.out.println("Add Department Clicked");
-
-        // For demo, you can call DAO directly
-        boolean added = departmentDAO.addDepartment("New Dept", 1); // Replace 1 with selected hotel ID
-        if (added) {
-            loadDepartments();
+        String selectedHotel = cmbHotel.getSelectionModel().getSelectedItem();
+        if (selectedHotel == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a hotel first.");
+            alert.showAndWait();
+            return;
         }
+
+        // Prompt for department name
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Add Department");
+        dialog.setHeaderText("Add Department to Hotel: " + selectedHotel);
+        dialog.setContentText("Enter Department Name:");
+        dialog.showAndWait().ifPresent(deptName -> {
+            if (!deptName.trim().isEmpty()) {
+                // Get hotel ID from name
+                int hotelId = departmentDAO.getHotelIdByName(selectedHotel);
+                boolean added = departmentDAO.addDepartment(deptName.trim(), hotelId);
+                if (added) {
+                    loadDepartments();
+                } else {
+                    Alert error = new Alert(Alert.AlertType.ERROR, "Failed to add department.");
+                    error.showAndWait();
+                }
+            }
+        });
     }
 
     @FXML
