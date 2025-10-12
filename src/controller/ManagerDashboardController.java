@@ -1,53 +1,103 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.Node;
+import javafx.event.ActionEvent;
+import java.net.URL;
 
 public class ManagerDashboardController {
 
     @FXML
-    private StackPane contentArea;
+    private StackPane contentArea; // Center content area
 
     @FXML
-    private void handleLogout() {
-        // Implement logout logic
-        System.out.println("Logout Clicked");
+    private VBox leftMenuContainer; // Left menu container (if you have a sidebar)
+
+    // -----------------------------------
+    // Utility: Load FXML into content area
+    // -----------------------------------
+    private void loadContent(String fxmlPath) {
+        try {
+            URL resource = getClass().getResource(fxmlPath);
+            if (resource == null) {
+                System.err.println("FXML not found: " + fxmlPath);
+                return;
+            }
+
+            Parent pane = FXMLLoader.load(resource);
+
+            if (contentArea != null) {
+                contentArea.getChildren().clear();
+                contentArea.getChildren().add(pane);
+            } else {
+                System.err.println("contentArea is null! Check fx:id in FXML.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    // -----------------------------------
+    // Menu button actions
+    // -----------------------------------
 
     @FXML
     private void openViewHotels() {
-        // Open view-only hotels UI
-        System.out.println("View Hotels Clicked");
-        // Example: load a FXML for viewing hotels
+        System.out.println("Opening view_hotels.fxml...");
+        loadContent("/view/view_hotels.fxml");
     }
 
     @FXML
     private void openManageRooms() {
-        System.out.println("Manage Rooms Clicked");
-        // Load Manage Rooms FXML
+        System.out.println("Opening manage_rooms.fxml...");
+        loadContent("/view/manage_rooms.fxml");
     }
 
     @FXML
     private void openManageGuests() {
-        System.out.println("Manage Guests Clicked");
-        // Load Manage Guests FXML
+        System.out.println("Opening manage_guests.fxml...");
+        loadContent("/view/manage_guests.fxml");
     }
 
     @FXML
     private void openManageReservations() {
-        System.out.println("Manage Reservations Clicked");
-        // Load Manage Reservations FXML
+        System.out.println("Opening manage_reservations.fxml...");
+        loadContent("/view/manage_reservations.fxml");
     }
 
     @FXML
     private void openManageDepartments() {
-        System.out.println("Manage Departments Clicked");
-        // Load Manage Departments FXML
+        System.out.println("Opening manage_departments.fxml...");
+        loadContent("/view/manage_departments.fxml");
     }
 
     @FXML
     private void openManageStaff() {
-        System.out.println("Manage Staff Clicked");
-        // Load Manage Staff FXML
+        System.out.println("Opening manage_staff.fxml...");
+        loadContent("/view/manage_staff.fxml");
+    }
+
+    // -----------------------------------
+    // Logout
+    // -----------------------------------
+    @FXML
+    private void handleLogout(ActionEvent event) {
+        try {
+            URL resource = getClass().getResource("/view/login.fxml");
+            if (resource == null) {
+                System.err.println("login.fxml not found!");
+                return;
+            }
+            Parent root = FXMLLoader.load(resource);
+            Node source = (Node) event.getSource();
+            source.getScene().setRoot(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
+
