@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.LoginController"
+            prefWidth="500" prefHeight="400" style="-fx-background-color: linear-gradient(to bottom, #2c3e50, #4ca1af);">
+
+    <!-- Main container -->
+    <VBox alignment="CENTER" spacing="20" layoutX="75" layoutY="50" prefWidth="350" prefHeight="300"
+          style="-fx-background-color: rgba(255,255,255,0.95); -fx-background-radius: 20; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10,0,0,5);">
+        
+        <!-- Hotel Logo / Icon -->
+        <ImageView fitWidth="80" fitHeight="80">
+            <image>
+                <Image url="C:\Users\Tarun\Desktop\Tarun\Java+Dbsc\hotel-management-erp\src\Images\hotel.png"/>
+            </image>
+        </ImageView>
+
+        <Label text="Hotel Management ERP" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #34495e;" />
+
+        <!-- Username Field -->
+        <TextField fx:id="usernameField" promptText="Username" prefWidth="250" style="-fx-background-radius: 15; -fx-padding: 8 12; -fx-border-radius: 15; -fx-border-color: #bdc3c7;"/>
+        
+        <!-- Password Field -->
+        <PasswordField fx:id="passwordField" promptText="Password" prefWidth="250" style="-fx-background-radius: 15; -fx-padding: 8 12; -fx-border-radius: 15; -fx-border-color: #bdc3c7;"/>
+        
+        <!-- Role ComboBox -->
+        <ComboBox fx:id="roleComboBox" prefWidth="250" style="-fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #bdc3c7;">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Admin"/>
+                    <String fx:value="Manager"/>
+                    <String fx:value="Receptionist"/>
+                    <String fx:value="User"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+        
+        <!-- Login Button -->
+        <Button text="Login" onAction="#handleLogin" prefWidth="250" style="
+                -fx-background-radius: 20;
+                -fx-background-color: #3498db;
+                -fx-text-fill: white;
+                -fx-font-weight: bold;
+                -fx-cursor: hand;
+            ">
+            <effect>
+                <DropShadow radius="5" offsetX="0" offsetY="3" color="#2980b9"/>
+            </effect>
+        </Button>
+
+        <Label fx:id="messageLabel" textFill="red" style="-fx-font-weight: bold;"/>
+        
+    </VBox>
+
+</AnchorPane>

@@ -1,0 +1,22 @@
+# Ignore all `.class` files
+*.class
+
+# Ignore build folders
+bin/
+out/
+target/
+
+# Ignore IntelliJ or VS Code settings
+.idea/
+.vscode/
+
+# Ignore your database config
+src/util/DBConnection.java
+
+
+# Ignore all log files
+*.log
+
+# Ignore OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.ManageDepartmentsController"
+      spacing="15">
+
+    <!-- Correct padding -->
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="🏢 Manage Departments"
+               style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="➕ Add Department" onAction="#handleAddDepartment"/>
+    </HBox>
+
+    <!-- Table for Departments -->
+    <TableView fx:id="departmentTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colDeptId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colDeptName" text="Department Name" prefWidth="200"/>
+            <TableColumn fx:id="colHotel" text="Hotel" prefWidth="200"/>
+            <TableColumn fx:id="colActions" text="Actions" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+</VBox>
