@@ -1,15 +1,12 @@
 package controller;
 
+import dao.DepartmentDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Department;
-import model.Hotel;
-import util.DBConnection;
-
-import java.sql.*;
 
 public class ManageDepartmentsController {
 
@@ -25,6 +22,7 @@ public class ManageDepartmentsController {
     private TableColumn<Department, Void> colActions;
 
     private ObservableList<Department> departmentList = FXCollections.observableArrayList();
+    private DepartmentDAO departmentDAO = new DepartmentDAO();
 
     @FXML
     public void initialize() {
@@ -38,23 +36,7 @@ public class ManageDepartmentsController {
 
     private void loadDepartments() {
         departmentList.clear();
-        try (Connection conn = DBConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(
-                     "SELECT d.Dept_id, d.Dept_name, h.HotelName FROM Department d " +
-                             "JOIN Hotel h ON d.Hotel_id = h.Hotel_id")) {
-
-            while (rs.next()) {
-                int id = rs.getInt("Dept_id");
-                String name = rs.getString("Dept_name");
-                String hotel = rs.getString("HotelName");
-
-                departmentList.add(new Department(id, name, hotel));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        departmentList.addAll(departmentDAO.getAllDepartments());
         departmentTable.setItems(departmentList);
     }
 
@@ -62,5 +44,36 @@ public class ManageDepartmentsController {
     private void handleAddDepartment() {
         // TODO: Open a dialog to add department
         System.out.println("Add Department Clicked");
+
+        // For demo, you can call DAO directly
+        boolean added = departmentDAO.addDepartment("New Dept", 1); // Replace 1 with selected hotel ID
+        if (added) {
+            loadDepartments();
+        }
+    }
+
+    @FXML
+    private void handleDeleteDepartment() {
+        Department selected = departmentTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a department to delete.");
+            alert.showAndWait();
+            return;
+        }
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure you want to delete department: " + selected.getDeptName() + "?",
+                ButtonType.YES, ButtonType.NO);
+        confirm.showAndWait();
+
+        if (confirm.getResult() == ButtonType.YES) {
+            boolean deleted = departmentDAO.deleteDepartment(selected.getDeptId());
+            if (deleted) {
+                loadDepartments();
+            } else {
+                Alert error = new Alert(Alert.AlertType.ERROR, "Failed to delete department.");
+                error.showAndWait();
+            }
+        }
     }
 }

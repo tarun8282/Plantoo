@@ -7,7 +7,8 @@
 
 <VBox xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controller.ManageDepartmentsController"
-      spacing="15">
+      spacing="15"
+      stylesheets="@cSS/managedepartment.css">
 
     <!-- Correct padding -->
     <padding>
@@ -20,6 +21,7 @@
                style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
         <Region HBox.hgrow="ALWAYS"/>
         <Button text="➕ Add Department" onAction="#handleAddDepartment"/>
+        <Button text="🗑 Delete Department" onAction="#handleDeleteDepartment"/>
     </HBox>
 
     <!-- Table for Departments -->
