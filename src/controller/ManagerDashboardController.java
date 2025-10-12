@@ -48,7 +48,7 @@ public class ManagerDashboardController {
     @FXML
     private void openViewHotels() {
         System.out.println("Opening view_hotels.fxml...");
-        loadContent("/view/view_hotels.fxml");
+        loadContent("/view/manageHotelViewOnly.fxml");
     }
 
     @FXML
@@ -66,7 +66,7 @@ public class ManagerDashboardController {
     @FXML
     private void openManageReservations() {
         System.out.println("Opening manage_reservations.fxml...");
-        loadContent("/view/manage_reservations.fxml");
+        loadContent("/view/manage_reservation.fxml");
     }
 
     @FXML
