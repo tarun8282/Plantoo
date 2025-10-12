@@ -15,17 +15,23 @@
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <!-- Header -->
+    <!-- Header + Controls -->
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="🏢 Manage Departments"
                style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
         <Region HBox.hgrow="ALWAYS"/>
+        
+        <!-- Hotel Selector ComboBox -->
+        <Label text="Select Hotel:"/>
+        <ComboBox fx:id="cmbHotel" promptText="Choose a Hotel"/>
+
+        <!-- Action Buttons -->
         <Button text="➕ Add Department" onAction="#handleAddDepartment"/>
         <Button text="🗑 Delete Department" onAction="#handleDeleteDepartment"/>
     </HBox>
 
     <!-- Table for Departments -->
-    <TableView fx:id="departmentTable" VBox.vgrow="ALWAYS">
+    <TableView fx:id="departmentTable" VBox.vgrow="ALWAYS" style="-fx-background-color: #ffffff; -fx-border-color: #ddd;">
         <columns>
             <TableColumn fx:id="colDeptId" text="ID" prefWidth="50"/>
             <TableColumn fx:id="colDeptName" text="Department Name" prefWidth="200"/>

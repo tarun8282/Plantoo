@@ -29,6 +29,63 @@ public class DepartmentDAO {
         }
         return departments;
     }
+    public int getHotelIdByName(String hotelName) {
+    String sql = "SELECT Hotel_id FROM Hotel WHERE HotelName = ?";
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, hotelName);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("Hotel_id");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return -1; // Not found
+}
+
+
+    // Fetch departments by hotel name (for ComboBox filter)
+    public List<Department> getDepartmentsByHotel(String hotelName) {
+        List<Department> list = new ArrayList<>();
+        String sql = "SELECT d.Dept_id, d.Dept_name, h.HotelName " +
+                     "FROM Department d JOIN Hotel h ON d.Hotel_id = h.Hotel_id " +
+                     "WHERE h.HotelName = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, hotelName);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Department d = new Department(
+                        rs.getInt("Dept_id"),
+                        rs.getString("Dept_name"),
+                        rs.getString("HotelName")
+                );
+                list.add(d);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    // Fetch all hotel names (for ComboBox)
+    public List<String> getAllHotelNames() {
+        List<String> hotels = new ArrayList<>();
+        String sql = "SELECT HotelName FROM Hotel ORDER BY HotelName";
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                hotels.add(rs.getString("HotelName"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return hotels;
+    }
 
     // Add new department
     public boolean addDepartment(String deptName, int hotelId) {
@@ -87,7 +144,6 @@ public class DepartmentDAO {
 
             ps.setInt(1, deptId);
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
                 return new Department(
                         rs.getInt("Dept_id"),
