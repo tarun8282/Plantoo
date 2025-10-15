@@ -39,6 +39,15 @@ public class GuestDAO {
                 }
                 pstPhone.executeBatch();
             }
+
+            // Insert password into Guest_Login table
+            if (guest.getPassword() != null && !guest.getPassword().isEmpty()) {
+                String insertLoginSQL = "INSERT INTO Guest_Login (Guest_id, Password) VALUES (?, ?)";
+                PreparedStatement pstLogin = conn.prepareStatement(insertLoginSQL);
+                pstLogin.setInt(1, guestId);
+                pstLogin.setString(2, guest.getPassword());
+                pstLogin.executeUpdate();
+            }
         }
     }
 
@@ -70,10 +79,25 @@ public class GuestDAO {
             }
             pstPhone.executeBatch();
         }
+
+        // Update password in Guest_Login table
+        if (guest.getPassword() != null && !guest.getPassword().isEmpty()) {
+            String updateLoginSQL = "UPDATE Guest_Login SET Password = ? WHERE Guest_id = ?";
+            PreparedStatement pstLogin = conn.prepareStatement(updateLoginSQL);
+            pstLogin.setString(1, guest.getPassword());
+            pstLogin.setInt(2, guest.getGuestId());
+            pstLogin.executeUpdate();
+        }
     }
 
     // ---------------- Delete Guest ----------------
     public void deleteGuest(int guestId) throws SQLException {
+        // Delete from Guest_Login
+        String deleteLoginSQL = "DELETE FROM Guest_Login WHERE Guest_id = ?";
+        PreparedStatement pstLogin = conn.prepareStatement(deleteLoginSQL);
+        pstLogin.setInt(1, guestId);
+        pstLogin.executeUpdate();
+
         // Delete phone numbers first
         String deletePhonesSQL = "DELETE FROM Guest_Phone WHERE Guest_id = ?";
         PreparedStatement pstDelete = conn.prepareStatement(deletePhonesSQL);

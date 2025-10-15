@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GuestPanelController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #007bff; -fx-padding: 15 20;">
+            <effect>
+                <DropShadow color="#00000040" radius="5.0" />
+            </effect>
+            <children>
+                <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;" text="Guest Portal">
+                    <font>
+                        <Font name="Segoe UI" size="24.0" />
+                    </font>
+                </Label>
+                <Pane HBox.hgrow="ALWAYS" />
+                <Button fx:id="btnLogout" onAction="#handleLogout" style="-fx-background-color: white; -fx-text-fill: #007bff; -fx-font-weight: bold; -fx-border-radius: 4px; -fx-background-radius: 4px;" text="Logout" />
+            </children>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="25">
+            <padding>
+                <Insets bottom="30" left="40" right="40" top="30" />
+            </padding>
+
+            <VBox alignment="TOP_CENTER" maxWidth="500" spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 12px; -fx-border-color: #ced4da; -fx-border-width: 1px;">
+                <effect>
+                    <DropShadow color="#0000001a" offsetX="2.0" offsetY="2.0" radius="8.0" />
+                </effect>
+
+                <Label fx:id="lblName" alignment="TOP_RIGHT" contentDisplay="RIGHT" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #343a40;" text="[Guest Full Name]" textAlignment="CENTER" textFill="#1746ef" />
+
+                <GridPane hgap="20" vgap="12">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" minWidth="100" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+
+                    <Label style="-fx-text-fill: #6c757d;" text="Guest ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label fx:id="lblGuestId" style="-fx-font-weight: bold; -fx-text-fill: #007bff;" text="G-12345" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                    <Label style="-fx-text-fill: #6c757d;" text="Age:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label fx:id="lblAge" text="34" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                    <Label style="-fx-text-fill: #6c757d;" text="Gender:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label fx:id="lblGender" text="Male" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                    <Label style="-fx-text-fill: #6c757d;" text="Phone:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <Label fx:id="lblPhones" style="-fx-text-fill: #28a745;" text="+1 (555) 123-4567" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+                </GridPane>
+            </VBox>
+
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 12px;" VBox.vgrow="ALWAYS">
+                <effect>
+                    <DropShadow color="#0000001a" offsetX="2.0" offsetY="2.0" radius="8.0" />
+                </effect>
+
+                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #343a40;" text="Your Active Reservations" />
+
+                <TableView fx:id="reservationTable" minHeight="200" style="-fx-border-color: #dee2e6; -fx-border-width: 1px; -fx-background-radius: 6px; -fx-border-radius: 6px;" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colReservationId" prefWidth="120" style="-fx-alignment: CENTER;" text="Reservation ID" />
+                        <TableColumn fx:id="colHotelId" prefWidth="120" style="-fx-alignment: CENTER;" text="Hotel" />
+                        <TableColumn fx:id="colRoomNum" prefWidth="90" style="-fx-alignment: CENTER;" text="Room No." />
+                        <TableColumn fx:id="colCheckIn" prefWidth="150" style="-fx-alignment: CENTER_LEFT;" text="Check-In Date" />
+                        <TableColumn fx:id="colCheckOut" prefWidth="150" style="-fx-alignment: CENTER_LEFT;" text="Check-Out Date" />
+                        <TableColumn fx:id="colActions" prefWidth="100" style="-fx-alignment: CENTER;" text="Actions">
+                            </TableColumn>
+                    </columns>
+                </TableView>
+
+                <Label fx:id="lblNoReservation" style="-fx-text-fill: #dc3545; -fx-font-style: italic;" text="No active reservations found." visible="false" />
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

@@ -13,6 +13,7 @@ public class GuestFormController {
     @FXML private Label lblTitle;
     @FXML private TextField txtName, txtAge, txtPhones;
     @FXML private ComboBox<String> comboGender;
+    @FXML private PasswordField txtPassword; // NEW: password field
 
     private Stage stage;
     private Guest guest;
@@ -30,6 +31,8 @@ public class GuestFormController {
             txtAge.setText(String.valueOf(guest.getAge()));
             comboGender.setValue(guest.getGender());
             txtPhones.setText(String.join(", ", guest.getPhoneNumbers()));
+            // For security, leave password blank when editing
+            txtPassword.setText("");
         } else {
             lblTitle.setText("Add Guest");
         }
@@ -37,6 +40,10 @@ public class GuestFormController {
 
     public Guest getGuest() {
         return guest;
+    }
+
+    public String getPassword() {
+        return txtPassword.getText().trim();
     }
 
     // -------------------- Button Handlers --------------------
@@ -74,14 +81,25 @@ public class GuestFormController {
                 phones.add(p);
             }
 
-            // Create or update Guest object
+            // Validate password for new guest
             if (guest == null) {
+                String password = txtPassword.getText().trim();
+                if (password.isEmpty()) {
+                    showAlert("Password cannot be empty.");
+                    return;
+                }
                 guest = new Guest(0, name, age, gender, phones);
+                guest.setPassword(password); // store password for DB insertion
             } else {
                 guest.setName(name);
                 guest.setAge(age);
                 guest.setGender(gender);
                 guest.setPhoneNumbers(phones);
+                // Update password only if a new one is entered
+                String newPassword = txtPassword.getText().trim();
+                if (!newPassword.isEmpty()) {
+                    guest.setPassword(newPassword);
+                }
             }
 
             stage.close(); // Close the form

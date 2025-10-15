@@ -8,6 +8,7 @@ public class Guest {
     private int age;
     private String gender;
     private List<String> phoneNumbers; // multiple phones
+    private String password; // NEW
 
     public Guest(int guestId, String name, int age, String gender, List<String> phoneNumbers) {
         this.guestId = guestId;
@@ -15,6 +16,15 @@ public class Guest {
         this.age = age;
         this.gender = gender;
         this.phoneNumbers = phoneNumbers;
+    }
+
+    public Guest(int guestId, String name, int age, String gender, List<String> phoneNumbers, String password) {
+        this.guestId = guestId;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.phoneNumbers = phoneNumbers;
+        this.password = password;
     }
 
     // Getters & Setters
@@ -32,6 +42,9 @@ public class Guest {
 
     public List<String> getPhoneNumbers() { return phoneNumbers; }
     public void setPhoneNumbers(List<String> phoneNumbers) { this.phoneNumbers = phoneNumbers; }
+
+    public String getPassword() { return password; } // NEW
+    public void setPassword(String password) { this.password = password; } // NEW
 
     // For TableView, sometimes we want a single string:
     public String getPhoneNumbersAsString() {

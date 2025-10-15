@@ -62,7 +62,7 @@
                     <Insets left="20.0" right="20.0"/>
                 </padding>
 
-                <Label text="📊 Dashboard Overview" 
+                <Label text="📊 Admin Dashboard " 
                        style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
 
                 <Region HBox.hgrow="ALWAYS"/>

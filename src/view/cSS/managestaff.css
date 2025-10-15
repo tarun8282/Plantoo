@@ -34,7 +34,7 @@
 
 /* Specific button colors */
 .btn-add { -fx-background-color: #4CAF50; }
-.btn-edit { -fx-background-color: #2196F3; }
+.btn-edit { -fx-background-color: #4CAF50; }
 .btn-delete { -fx-background-color: #f44336; }
 .btn-refresh { -fx-background-color: #9E9E9E; }
 

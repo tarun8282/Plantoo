@@ -15,50 +15,74 @@
     <VBox alignment="CENTER" spacing="20" maxWidth="380">
 
         <VBox spacing="25" alignment="CENTER"
-              style="-fx-background-color: white; -fx-background-radius: 20;  -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 20, 0, 5, 5);">
+              style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 20, 0, 5, 5);">
             <padding>
                 <Insets top="40" right="40" bottom="40" left="40"/>
             </padding>
 
+            <!-- Logo -->
             <ImageView fitHeight="60" fitWidth="60" pickOnBounds="true" preserveRatio="true">
                 <image>
                     <Image url="@../images/hotel.png"/>
                 </image>
             </ImageView>
 
+            <!-- Title -->
             <VBox alignment="CENTER" spacing="5">
                 <Label text="Plantoo" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #333333;">
                     <font>
                         <Font name="System Bold" size="36.0" />
                     </font>
                 </Label>
-                <Label text="Welcome ! Please login to your account." style="-fx-text-fill: #888888; -fx-font-size: 14px;"/>
+                <Label text="Welcome! Please login to your account." style="-fx-text-fill: #888888; -fx-font-size: 14px;"/>
             </VBox>
 
-
+            <!-- Form Fields -->
             <VBox spacing="15" alignment="CENTER">
 
+                <!-- Role -->
                 <HBox alignment="CENTER_LEFT" spacing="10"
                       style="-fx-background-color: #f0f2f5; -fx-background-radius: 8;">
                     <padding>
                         <Insets left="10"/>
                     </padding>
-                    <Label text="👤" style="-fx-font-size: 18px;"/> <ComboBox fx:id="roleComboBox" promptText="Select Role" prefWidth="250"
+                    <Label text="👤" style="-fx-font-size: 18px;"/>
+                    <ComboBox fx:id="roleComboBox"
+                              promptText="Select Role"
+                              prefWidth="250"
+                              onAction="#handleRoleSelection"
                               style="-fx-background-color: transparent;"/>
                 </HBox>
 
-                <HBox alignment="CENTER_LEFT" spacing="10"
+                <!-- Guest ID (Visible only for Guest) -->
+                <HBox fx:id="guestIdBox" alignment="CENTER_LEFT" spacing="10"
+                      style="-fx-background-color: #f0f2f5; -fx-background-radius: 8; -fx-visible: false;">
+                    <padding>
+                        <Insets left="10"/>
+                    </padding>
+                    <Label text="🆔" style="-fx-font-size: 18px;"/>
+                    <TextField fx:id="guestIdField"
+                               promptText="Enter Guest ID"
+                               prefWidth="250"
+                               style="-fx-background-color: transparent;"/>
+                </HBox>
+
+                <!-- Password -->
+                <HBox fx:id="passwordBox" alignment="CENTER_LEFT" spacing="10"
                       style="-fx-background-color: #f0f2f5; -fx-background-radius: 8;">
                     <padding>
                         <Insets left="10"/>
                     </padding>
-                    <Label text="🔒" style="-fx-font-size: 18px;"/> <PasswordField fx:id="passwordField" promptText="Enter Password" prefWidth="250"
-                                   style="-fx-background-color: transparent; -fx-border-color: transparent;"/>
+                    <Label text="🔒" style="-fx-font-size: 18px;"/>
+                    <PasswordField fx:id="passwordField"
+                                   promptText="Enter Password"
+                                   prefWidth="250"
+                                   style="-fx-background-color: transparent;"/>
                 </HBox>
 
             </VBox>
 
-
+            <!-- Login Button -->
             <Button text="Login" defaultButton="true" onAction="#handleLogin"
                     style="-fx-background-color: #2575fc; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;"
                     prefWidth="300" prefHeight="45">
@@ -69,5 +93,4 @@
 
         </VBox>
     </VBox>
-
 </StackPane>
