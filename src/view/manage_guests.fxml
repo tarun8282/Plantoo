@@ -13,7 +13,7 @@
     <top>
         <HBox spacing="15" alignment="CENTER_LEFT"
               style="-fx-background-color: #4e54c8; -fx-padding: 15;">
-            <Label text="👥 Manage Guests" 
+            <Label text="👥 Manage Guests"
                    style="-fx-font-size: 20px; -fx-text-fill: white; -fx-font-weight: bold;"/>
         </HBox>
     </top>
@@ -21,7 +21,7 @@
     <!-- CENTER CONTENT -->
     <center>
         <VBox spacing="15" alignment="TOP_CENTER" style="-fx-padding: 20;">
-            
+
             <!-- Search Bar -->
             <HBox spacing="10" alignment="CENTER_LEFT">
                 <TextField fx:id="txtSearchGuest" promptText="🔍 Search guest by name or ID"
@@ -32,11 +32,12 @@
             <!-- Table of Guests -->
             <TableView fx:id="tblGuests" prefHeight="350" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="colGuestId" text="Guest ID" prefWidth="120"/>
-                    <TableColumn fx:id="colGuestName" text="Name" prefWidth="180"/>
-                    <TableColumn fx:id="colGuestAge" text="Age" prefWidth="150"/>
-                    <TableColumn fx:id="colGuestGender" text="Gender" prefWidth="200"/>
-                    <TableColumn fx:id="colGuestPhone" text="Phone" prefWidth="200"/>
+                    <TableColumn fx:id="colGuestId" text="Guest ID" prefWidth="100"/>
+                    <TableColumn fx:id="colGuestName" text="Name" prefWidth="150"/>
+                    <TableColumn fx:id="colGuestAge" text="Age" prefWidth="100"/>
+                    <TableColumn fx:id="colGuestGender" text="Gender" prefWidth="120"/>
+                    <TableColumn fx:id="colGuestPhone" text="Phone" prefWidth="150"/>
+                    <TableColumn fx:id="colGuestPassword" text="Password" prefWidth="150"/>
                 </columns>
             </TableView>
 

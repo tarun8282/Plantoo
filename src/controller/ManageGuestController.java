@@ -25,6 +25,7 @@ public class ManageGuestController {
     @FXML private TableColumn<Guest, Integer> colGuestAge;
     @FXML private TableColumn<Guest, String> colGuestGender;
     @FXML private TableColumn<Guest, String> colGuestPhone;
+    @FXML private TableColumn<Guest, String> colGuestPassword;
 
     @FXML private TextField txtSearchGuest;
 
@@ -39,6 +40,20 @@ public class ManageGuestController {
         colGuestAge.setCellValueFactory(new PropertyValueFactory<>("age"));
         colGuestGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
         colGuestPhone.setCellValueFactory(new PropertyValueFactory<>("phoneNumbersAsString"));
+        colGuestPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
+
+        // ✅ Mask passwords visually
+        colGuestPassword.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String password, boolean empty) {
+                super.updateItem(password, empty);
+                if (empty || password == null || password.isEmpty()) {
+                    setText(null);
+                } else {
+                    setText("•".repeat(Math.min(password.length(), 8))); // mask with bullets
+                }
+            }
+        });
 
         try {
             Connection conn = DBConnection.getConnection();
@@ -131,7 +146,7 @@ public class ManageGuestController {
         ObservableList<Guest> filtered = FXCollections.observableArrayList();
         for (Guest g : guestList) {
             if (g.getName().toLowerCase().contains(keyword) ||
-                String.valueOf(g.getGuestId()).contains(keyword)) {
+                    String.valueOf(g.getGuestId()).contains(keyword)) {
                 filtered.add(g);
             }
         }
@@ -165,11 +180,15 @@ public class ManageGuestController {
         TextField txtPhones = new TextField();
         txtPhones.setPromptText("Phone numbers (comma separated)");
 
+        PasswordField txtPassword = new PasswordField();
+        txtPassword.setPromptText("Password");
+
         if (guest != null) {
             txtName.setText(guest.getName());
             txtAge.setText(String.valueOf(guest.getAge()));
             comboGender.setValue(guest.getGender());
             txtPhones.setText(String.join(", ", guest.getPhoneNumbers()));
+            txtPassword.setText(guest.getPassword());
         }
 
         grid.add(new Label("Name:"), 0, 0);
@@ -180,6 +199,8 @@ public class ManageGuestController {
         grid.add(comboGender, 1, 2);
         grid.add(new Label("Phones:"), 0, 3);
         grid.add(txtPhones, 1, 3);
+        grid.add(new Label("Password:"), 0, 4);
+        grid.add(txtPassword, 1, 4);
 
         dialog.getDialogPane().setContent(grid);
 
@@ -193,13 +214,15 @@ public class ManageGuestController {
                     }
 
                     int age = Integer.parseInt(txtAge.getText().trim());
-                    if (age > 99) {
-                        showAlert("Warning", "Age is unusually high (>99).", AlertType.WARNING);
-                    }
-
                     String gender = comboGender.getValue();
+                    String password = txtPassword.getText().trim();
+
                     if (gender == null || gender.isEmpty()) {
                         showAlert("Error", "Please select a gender.", AlertType.ERROR);
+                        return null;
+                    }
+                    if (password.isEmpty()) {
+                        showAlert("Error", "Password cannot be empty.", AlertType.ERROR);
                         return null;
                     }
 
@@ -214,12 +237,13 @@ public class ManageGuestController {
                     }
 
                     if (guest == null) {
-                        return new Guest(0, name, age, gender, phones);
+                        return new Guest(0, name, age, gender, phones, password);
                     } else {
                         guest.setName(name);
                         guest.setAge(age);
                         guest.setGender(gender);
                         guest.setPhoneNumbers(phones);
+                        guest.setPassword(password);
                         return guest;
                     }
 
