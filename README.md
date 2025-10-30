@@ -67,6 +67,7 @@ HotelManagementSystem/
 │
 ├── README.md
 └── pom.xml or build.gradle (if applicable)
+```
 
 ⚙️ Tech Stack
 | Technology                  | Purpose                 |
