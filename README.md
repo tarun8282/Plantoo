@@ -45,34 +45,73 @@ Built using JavaFX and FXML, styled with modern design principles.
 
 🧩 Project Structure
 ```text
-HotelManagementSystem/
+Plantoo/
 ├── src/
-│   ├── controller/
-│   │   ├── GuestPanelController.java
-│   │   ├── ManageReservationController.java
-│   │   └── ...
-│   ├── dao/
-│   │   ├── GuestDAO.java
-│   │   ├── ReservationDAO.java
-│   │   └── RoomDAO.java
-│   ├── model/
-│   │   ├── Guest.java
-│   │   ├── Reservation.java
-│   │   ├── Room.java
-│   │   └── Hotel.java
-│   ├── util/
-│   │   └── DBConnection.java
-│   ├── view/
-│   │   ├── login.fxml
-│   │   ├── guest_panel.fxml
-│   │   └── manage_reservation.fxml
-│   └── Main.java
+│ ├── model/ # Data Models (POJOs mapping to DB tables)
+│ │ ├── Hotel.java
+│ │ ├── HotelContact.java
+│ │ ├── Room.java
+│ │ ├── Guest.java
+│ │ ├── Reservation.java
+│ │ ├── Department.java
+│ │ ├── Staff.java
+│ │ └── RoomType.java
+│ │
+│ ├── dao/ # Data Access Layer (CRUD for each table)
+│ │ ├── HotelDAO.java
+│ │ ├── RoomDAO.java
+│ │ ├── GuestDAO.java
+│ │ ├── ReservationDAO.java
+│ │ ├── DepartmentDAO.java
+│ │ └── StaffDAO.java
+│ │
+│ ├── controller/ # JavaFX Controllers (UI + Business Logic)
+│ │ ├── AdminDashboardController.java
+│ │ ├── DepartmentController.java
+│ │ ├── GuestFormController.java
+│ │ ├── GuestPanelController.java
+│ │ ├── HotelFormController.java
+│ │ ├── LoginController.java
+│ │ ├── ManageDepartmentsController.java
+│ │ ├── ManageGuestController.java
+│ │ ├── ManageHotelsController.java
+│ │ ├── ManagerDashboardController.java
+│ │ ├── ManageReservationController.java
+│ │ ├── ManageRoomsController.java
+│ │ ├── ManageStaffController.java
+│ │ ├── ReservationFormController.java
+│ │ ├── RoomFormController.java
+│ │ ├── StaffFormController.java
+│ │ └── ViewHotelsController.java
+│ │
+│ ├── view/ # JavaFX UI Layouts (FXML Files)
+│ │ ├── css/ # Stylesheets
+│ │ └── Forms/ # Organized FXML Forms
+│ │ ├── admin_dashboard.fxml
+│ │ ├── guest_dashboard.fxml
+│ │ ├── login.fxml
+│ │ ├── manage_departments.fxml
+│ │ ├── manage_guests.fxml
+│ │ ├── manage_hotels.fxml
+│ │ ├── manage_reservation.fxml
+│ │ ├── manage_rooms.fxml
+│ │ ├── manage_staff.fxml
+│ │ ├── manageHotelViewOnly.fxml
+│ │ └── manager_dashboard.fxml
+│ │
+│ ├── util/ # Utilities and Helpers
+│ │ └── DBConnection.java # MySQL connection (Singleton pattern)
+│ │
+│ ├── resources/ # Optional assets (icons, config)
+│ │ └── icons/
+│ │
+│ └── Main.java # Application entry point (launches login)
 │
 ├── database/
-│   └── hotel_management.sql
+│ ├── hotel_management.sql # Creates all tables + inserts sample data
+│ └── ToClearData.sql # Safely clears all data
 │
-├── README.md
-└── pom.xml or build.gradle (if applicable)
+└── README.md
 ```
 
 ⚙️ Tech Stack
