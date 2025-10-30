@@ -38,6 +38,7 @@ Built using JavaFX and FXML, styled with modern design principles.
 
 
 🧩 Project Structure
+```text
 HotelManagementSystem/
 ├── src/
 │   ├── controller/
