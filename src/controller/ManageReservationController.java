@@ -4,7 +4,11 @@ import dao.ReservationDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import model.Reservation;
 
 import java.time.LocalDate;
@@ -53,43 +57,39 @@ public class ManageReservationController {
         reservationTable.setItems(reservationList);
     }
 
-    // ✅ Add Reservation
     @FXML
-    private void handleAddReservation() {
-        Reservation r = new Reservation();
-        r.setGuestId(Integer.parseInt(txtGuestId.getText()));
-        r.setHotelId(Integer.parseInt(txtHotelId.getText()));
-        r.setRoomNum(Integer.parseInt(txtRoomNum.getText()));
-        r.setCheckIn(dpCheckIn.getValue());
-        r.setCheckOut(dpCheckOut.getValue());
+private void handleAddReservation() {
+    openReservationForm(null); // null → Add mode
+}
 
-        if (reservationDAO.insertReservation(r)) {
-            showAlert("Reservation added successfully!");
-            loadReservations();
-        }
+@FXML
+private void handleEditReservation() {
+    Reservation selected = reservationTable.getSelectionModel().getSelectedItem();
+    if (selected == null) {
+        showAlert("Please select a reservation to edit!");
+        return;
     }
+    openReservationForm(selected); // non-null → Edit mode
+}
 
-    // ✅ Edit Reservation
-    @FXML
-    private void handleEditReservation() {
-        Reservation selected = reservationTable.getSelectionModel().getSelectedItem();
-        if (selected == null) {
-            showAlert("Please select a reservation to update!");
-            return;
-        }
+private void openReservationForm(Reservation reservation) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Forms/ReservationForm.fxml"));
+        Parent root = loader.load();
 
-        selected.setGuestId(Integer.parseInt(txtGuestId.getText()));
-        selected.setHotelId(Integer.parseInt(txtHotelId.getText()));
-        selected.setRoomNum(Integer.parseInt(txtRoomNum.getText()));
-        selected.setCheckIn(dpCheckIn.getValue());
-        selected.setCheckOut(dpCheckOut.getValue());
+        ReservationFormController controller = loader.getController();
+        if (reservation != null) controller.setReservation(reservation);
 
-        if (reservationDAO.updateReservation(selected)) {
-            showAlert("Reservation updated successfully!");
-            loadReservations();
-        }
+        Stage stage = new Stage();
+        stage.setTitle(reservation == null ? "Add Reservation" : "Edit Reservation");
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+
+        loadReservations(); // refresh after closing
+    } catch (Exception e) {
+        e.printStackTrace();
     }
-
+}
     // ✅ Delete Reservation
     @FXML
     private void handleDeleteReservation() {

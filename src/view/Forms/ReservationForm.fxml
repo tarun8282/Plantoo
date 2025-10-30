@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ReservationFormController"
+            stylesheets="@/view/cSS/form.css"
+            prefWidth="600" prefHeight="450">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT"
+              style="-fx-background-color: #4e54c8; -fx-padding: 15;">
+            <Label fx:id="lblTitle"
+                   text="➕ Add Reservation"
+                   style="-fx-font-size: 20px; -fx-text-fill: white; -fx-font-weight: bold;" />
+        </HBox>
+    </top>
+
+    <!-- CENTER FORM -->
+    <center>
+        <VBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 25;">
+            <GridPane hgap="20" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT" prefWidth="150"/>
+                    <ColumnConstraints prefWidth="300"/>
+                </columnConstraints>
+
+                <Label text="Guest ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtGuestId" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Hotel ID:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtHotelId" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Room Number:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtRoomNum" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Check-In Date:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="dpCheckIn" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Check-Out Date:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="dpCheckOut" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+            </GridPane>
+        </VBox>
+    </center>
+
+    <!-- BOTTOM BUTTONS -->
+    <bottom>
+        <HBox spacing="15" alignment="CENTER_RIGHT" style="-fx-padding: 20;">
+            <Button fx:id="btnSave" text="💾 Save" onAction="#handleSave" styleClass="primary-button"/>
+            <Button text="❌ Cancel" onAction="#handleCancel" styleClass="danger-button"/>
+        </HBox>
+    </bottom>
+</BorderPane>
