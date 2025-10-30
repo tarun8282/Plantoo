@@ -3,10 +3,10 @@
 A modern Hotel Management System built using JavaFX, MySQL, and MVC architecture, designed to simplify hotel operations such as guest reservations, room management, and hotel administration — all through a clean and interactive user interface.
 
 🖼️ Project Preview
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-4.png)
-![alt text](image-5.png)
+![alt text](images/image.png)
+![alt text](images/image-1.png)
+![alt text](images/image-4.png)
+![alt text](images/image-5.png)
 
 ✨ Features
 
