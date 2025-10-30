@@ -2,6 +2,12 @@
 
 A modern Hotel Management System built using JavaFX, MySQL, and MVC architecture, designed to simplify hotel operations such as guest reservations, room management, and hotel administration — all through a clean and interactive user interface.
 
+🖼️ Project Preview
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
+
 ✨ Features
 
 ✅ Guest Management
@@ -85,42 +91,57 @@ HotelManagementSystem/
 ![Data Base Schema](images/image.png)
 
 
-Create the Database
-Open MySQL and run the following:
 
+---
+
+## ⚙️ Setup Instructions
+
+### 🗄️ 1. Create the Database
+
+Open **MySQL** and run:
+
+```sql
 CREATE DATABASE hotel_management;
 USE hotel_management;
+```
 
 
-Import Tables
-Run all table creation and sample data queries from
-database/hotel_management.sql
+📦 2. Import Tables
 
-Update Connection
+Run all table creation and sample data queries from:
+
+    database/hotel_management.sql
+
+
+To safely empty all tables, run:
+
+    database/ToClearData.sql
+
+🔐 3. Update Connection
 Open DBConnection.java and update with your credentials:
 
-private static final String URL = "jdbc:mysql://localhost:3306/hotel_management";
-private static final String USER = "root";
-private static final String PASSWORD = "yourpassword";
+    private static final String URL = "jdbc:mysql://localhost:3306/hotel_management";
+    private static final String USER = "root";
+    private static final String PASSWORD = "yourpassword";
+
 
 🧠 How to Run (Step-by-Step)
 🧩 Option 1 — IntelliJ IDEA
 
 Open the Project
-
-Go to File → Open → select the project folder.
+File → Open → select the project folder
 
 Add JavaFX SDK
 
-Download JavaFX SDK from https://openjfx.io
-.
+    Download JavaFX SDK from https://openjfx.io
 
-Go to File → Project Structure → Libraries → Add JavaFX SDK.
+In IntelliJ: File → Project Structure → Libraries → Add JavaFX SDK
 
-VM Options (Run Configuration)
-Add this under Run → Edit Configurations → VM Options:
+Set VM Options (Run Configuration)
+Go to Run → Edit Configurations → VM Options and add:
 
---module-path "C:\path\to\javafx\lib" --add-modules javafx.controls,javafx.fxml
+    --module-path "C:\path\to\javafx\lib" --add-modules javafx.controls,javafx.fxml
+
 
 
 Build and Run
@@ -133,26 +154,26 @@ The main window should open showing your hotel dashboard.
 
 Install the following extensions:
 
-Extension Pack for Java
+    Extension Pack for Java
 
-JavaFX Support (optional but helpful)
+    JavaFX Support (optional but helpful)
 
-Download JavaFX SDK and extract it.
+    Download JavaFX SDK and extract it.
 
-Create a .vscode/launch.json file with:
+    Create a .vscode/launch.json file with:
 
-{
-  "version": "0.2.0",
-  "configurations": [
     {
-      "type": "java",
-      "name": "Run Hotel Management System",
-      "request": "launch",
-      "mainClass": "Main",
-      "vmArgs": "--module-path \"C:\\path\\to\\javafx\\lib\" --add-modules javafx.controls,javafx.fxml"
+      "version": "0.2.0",
+      "configurations": [
+        {
+          "type": "java",
+          "name": "Run Hotel Management System",
+          "request": "launch",
+          "mainClass": "Main",
+          "vmArgs": "--module-path \"C:\\path\\to\\javafx\\lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+      ]
     }
-  ]
-}
 
 
 Press F5 or click Run → Run Without Debugging.
@@ -175,5 +196,5 @@ Project By: Tarun Chaudhary
 
 💬 Feedback
 
-If you like this project, ⭐ the repository and share suggestions!
-Your feedback helps make this project even better.
+     If you like this project, ⭐ the repository and share suggestions!
+    Your feedback helps make this project even better.
