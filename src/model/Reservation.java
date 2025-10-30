@@ -13,16 +13,28 @@ public class Reservation {
 
     public Reservation() {}
 
-    public Reservation(int reservationId, int guestId, String guestName, int hotelId, int roomNum,
-                       LocalDate checkIn, LocalDate checkOut, String status) {
-        this.reservationId = reservationId;
-        this.guestId = guestId;
-        this.guestName = guestName;
-        this.hotelId = hotelId;
-        this.roomNum = roomNum;
-        this.checkIn = checkIn;
-        this.checkOut = checkOut;
-    }
+    private String hotelName;
+
+public Reservation(int reservationId, int guestId, String guestName, int hotelId, int roomNum,
+                   LocalDate checkIn, LocalDate checkOut, String hotelName) {
+    this.reservationId = reservationId;
+    this.guestId = guestId;
+    this.guestName = guestName;
+    this.hotelId = hotelId;
+    this.roomNum = roomNum;
+    this.checkIn = checkIn;
+    this.checkOut = checkOut;
+    this.hotelName = hotelName;
+}
+
+public String getHotelName() {
+    return hotelName;
+}
+
+public void setHotelName(String hotelName) {
+    this.hotelName = hotelName;
+}
+
 
     // Getters & Setters
     public int getReservationId() { return reservationId; }

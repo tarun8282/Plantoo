@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Guest;
 import model.Reservation;
@@ -22,7 +23,7 @@ public class GuestPanelController {
     // ---------------- UI Elements ----------------
     @FXML private Label lblGuestId, lblName, lblAge, lblGender, lblPhones, lblNoReservation;
     @FXML private TableView<Reservation> reservationTable;
-    @FXML private TableColumn<Reservation, Integer> colReservationId, colHotelId, colRoomNum;
+    @FXML private TableColumn<Reservation, Integer> colReservationId, colHotelName, colRoomNum;
     @FXML private TableColumn<Reservation, LocalDate> colCheckIn, colCheckOut;
     @FXML private Button btnLogout;
 
@@ -106,26 +107,29 @@ public class GuestPanelController {
 
         try (Connection conn = DBConnection.getConnection()) {
             String query = """
-                    SELECT reservation_id, guest_id, hotel_id, room_num, check_in, check_out
-                    FROM Reservation
-                    WHERE guest_id = ?
-                    """;
+    SELECT r.reservation_id, r.guest_id, h.HotelName, r.room_num, r.check_in, r.check_out
+    FROM Reservation r
+    JOIN Hotel h ON r.hotel_id = h.Hotel_id
+    WHERE r.guest_id = ?
+    """;
+
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, guestId);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                list.add(new Reservation(
-                        rs.getInt("reservation_id"),
-                        rs.getInt("guest_id"),
-                        "", // guestName not needed in table
-                        rs.getInt("hotel_id"),
-                        rs.getInt("room_num"),
-                        rs.getDate("check_in").toLocalDate(),
-                        rs.getDate("check_out").toLocalDate(),
-                        null
-                ));
-            }
+    list.add(new Reservation(
+            rs.getInt("reservation_id"),
+            rs.getInt("guest_id"),
+            "", // guestName not needed here
+            0,  // we no longer need hotel_id here
+            rs.getInt("room_num"),
+            rs.getDate("check_in").toLocalDate(),
+            rs.getDate("check_out").toLocalDate(),
+            rs.getString("HotelName") // hotel name
+    ));
+}
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,10 +148,11 @@ public class GuestPanelController {
 
     /** Setup table columns for Reservation TableView */
     private void setupReservationTable() {
-        colReservationId.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("reservationId"));
-        colHotelId.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("hotelId"));
-        colRoomNum.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("roomNum"));
-        colCheckIn.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("checkIn"));
-        colCheckOut.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("checkOut"));
+        colReservationId.setCellValueFactory(new PropertyValueFactory<>("reservationId"));
+colHotelName.setCellValueFactory(new PropertyValueFactory<>("hotelName"));
+colRoomNum.setCellValueFactory(new PropertyValueFactory<>("roomNum"));
+colCheckIn.setCellValueFactory(new PropertyValueFactory<>("checkIn"));
+colCheckOut.setCellValueFactory(new PropertyValueFactory<>("checkOut"));
+
     }
 }
