@@ -1,5 +1,7 @@
 🏨 Hotel Management System
 
+https://plantoo.figma.site/
+
 A modern Hotel Management System built using JavaFX, MySQL, and MVC architecture, designed to simplify hotel operations such as guest reservations, room management, and hotel administration — all through a clean and interactive user interface.
 
 🖼️ Project Preview
